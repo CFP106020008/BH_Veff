@@ -9,6 +9,16 @@ import numpy as np
 import matplotlib.pyplot as plt
 import tqdm
 
+# ====================== #
+# Set the parameter here!
+
+hmin = 1 + 1e-6
+hmax = 2.5
+href = 1.5
+
+# ====================== #
+
+
 G = 6.67e-11
 c = 299792458
 
@@ -59,10 +69,10 @@ class System:
         Ymax = np.max(self.V) + (np.max(self.V) - np.min(self.V))*0.9
         return [Xmin, Xmax, Ymin, Ymax]
 
-BH_lim = System(2e30, 1, 10, 1.5)
+BH_lim = System(2e30, 1, 10, href)
 XYlims = BH_lim.estimate_xylims()
 
-for i, h in tqdm.tqdm(enumerate(np.concatenate((np.linspace(2, 1, 60), np.ones(10))))):
+for i, h in tqdm.tqdm(enumerate(np.concatenate((np.linspace(hmax, hmin, 60), hmin*np.ones(10))))):
     BH1 = System(2e30, 1, 10, h)
     BH1.plot(fig, ax, 
              "./images/Veff_{:04d}.png".format(i), 
