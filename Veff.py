@@ -47,25 +47,25 @@ class System:
         else:
             ax.set_xlim(xylims[0], xylims[1])
             ax.set_ylim(xylims[2], xylims[3])
-        plt.tight_layout()
+        #plt.tight_layout()
         if save:
             plt.savefig(name, dpi=200)
         else:
             plt.show()
     def estimate_xylims(self):
-        return np.array([self.r_min, self.r_max, 
-                         np.min(self.V) + (np.max(self.V) - np.min(self.V))*0.1, 
-                         np.max(self.V) + (np.max(self.V) - np.min(self.V))*0.9])
+        Xmin = self.r_min
+        Xmax = self.r_max
+        Ymin = np.min(self.V) + (np.max(self.V) - np.min(self.V))*0.1
+        Ymax = np.max(self.V) + (np.max(self.V) - np.min(self.V))*0.9
+        return [Xmin, Xmax, Ymin, Ymax]
 
+BH_lim = System(2e30, 1, 10, 1.5)
+XYlims = BH_lim.estimate_xylims()
 
 for i, h in tqdm.tqdm(enumerate(np.concatenate((np.linspace(2, 1, 60), np.ones(10))))):
     BH1 = System(2e30, 1, 10, h)
-        XYlims = BH1.estimate_xylims()
-    BH1.plot(fig, ax, "Veff_{:04d}.png".format(i), save=True)
+    BH1.plot(fig, ax, 
+             "./images/Veff_{:04d}.png".format(i), 
+             xylims = XYlims,
+             save=True)
     ax.cla()
-#for i, h in tqdm.tqdm(enumerate(np.linspace(3, 1, 10))):
-#    BH1 = System(2e30, 1, 10, 1)
-#    #if i==0:
-#    #    XYlims = BH1.estimate_xylims()
-#    BH1.plot(fig, ax, "Veff_{:04d}.png".format(i), xylims=XYlims, save=True)
-#    ax.cla()
