@@ -8,3 +8,8 @@ Actually, my homework does not ask us to do animation. Nonetheless, I think this
 Feel free to contact me if you have any question or comments!
 
 ![Alt Text](https://github.com/CFP106020008/BH_Veff/blob/main/Veff.gif)
+
+### More reference
+[Wiki: Schwarzschild geodesics](https://en.wikipedia.org/wiki/Schwarzschild_geodesics)
+
+
